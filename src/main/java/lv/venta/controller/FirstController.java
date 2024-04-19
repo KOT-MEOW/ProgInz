@@ -45,7 +45,7 @@ public class FirstController {
 		// paradit hmtl lapa
 	
 		
-		@GetMapping("/product/moreproducts")
+		@GetMapping("/product/moreproducts")	//localhost:8080/product/moreproducts
 		public String getMoreProducts(Model model) {
 			
 			ArrayList<Product> allProducts = new ArrayList<>();
@@ -59,7 +59,7 @@ public class FirstController {
 			allProducts.add(productN3);
 			
 			model.addAttribute("mydata", allProducts);
-			return "";
+			return "more-product-in-page";
 		}
 		
 		

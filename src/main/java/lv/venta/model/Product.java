@@ -1,5 +1,8 @@
 package lv.venta.model;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,7 +20,9 @@ public class Product {
 	@Setter(value = AccessLevel.NONE)
 	private int id;
 	
-	
+	@NotNull
+	@Size(min = 3, max = 50)
+	@Pattern(regexp = "[A-Za-z ]+")
 	private String title;
 	private float price;
 	private String description;

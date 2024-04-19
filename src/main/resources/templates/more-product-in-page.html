@@ -1,12 +1,13 @@
 <html xmlns:th="http://www.thymeleaf.org"> 
 	
 <body>
+	<th:block th:each="product: ${mydata}">
 	<p>Product no JAVA:</p>
-	<p th:text="${mydata.getTitle()}"></p>
-	<p th:text="${mydata.getPrice()}"></p>
-	<p th:text="${mydata.getDescription()}"></p>
-	<p th:text="${mydata.getQuantity()}"></p>
-	<p th:text="${mydata.toString()}"></p>
+	<p th:text="${product.getTitle()}"></p>
+	<p th:text="${product.getPrice()}"></p>
+	<p th:text="${product.getDescription()}"></p>
+	<p th:text="${product.getQuantity()}"></p>
+	</th:block>
 </body>
 
 </html>
