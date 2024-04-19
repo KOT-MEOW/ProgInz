@@ -1,12 +1,13 @@
 package lv.venta.model;
 
-import org.hibernate.annotations.Table;
+
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -24,7 +25,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 //@AllArgsConstructor
-@jakarta.persistence.Table(name = "ProductTable")
+@Table(name = "ProductTable")
 @Entity
 public class Product {
 	
