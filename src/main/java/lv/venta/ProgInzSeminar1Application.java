@@ -30,18 +30,18 @@ public class ProgInzSeminar1Application {
 				//izsaukt caur repo findById()
 				//izsaukt update cour repo
 				
-				/*
-				Product p1 = new Product("productThree", 0.99f, "mas", 3);
-				Product p2 = new Product("producttwo", 1.99f, "was", 2);
-				Product p3 = new Product("productOne", 2.99f, "kas", 1);
 				
-				productRepo.save(p1);
-				productRepo.save(p2);
-				productRepo.save(p3);
+				Product p11 = new Product("productTen", 0.99f, "aaaa", 3);
+				Product p22 = new Product("productEleven", 1.99f, "bbb", 2);
+				Product p33 = new Product("productTwelve", 2.99f, "cccc", 1);
+				
+				productRepo.save(p11);
+				productRepo.save(p22);
+				productRepo.save(p33);
 				
 				System.out.println("how many product " + productRepo.count());
-				System.out.println("get product by id (102): " + productRepo.findById(102).get());
-				
+				System.out.println("get product by id (102): " + productRepo.findById(3).get());
+				/*
 				Product productForDeliting = productRepo.findById(2).get();
 				productRepo.delete(productForDeliting);
 				Product productForUpdate = productRepo.findById(3).get();
