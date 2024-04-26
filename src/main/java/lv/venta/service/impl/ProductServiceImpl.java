@@ -45,8 +45,15 @@ public class ProductServiceImpl implements IProductCRUDService, IProductFilterin
 
 	@Override
 	public void create(Product product) {
-		// TODO Auto-generated method stub
 		
+		Product existedProduct = productRepo.findByTitleAndDescriptionAndPrice(product.getTitle(),product.getDescription(),product.getPrice());
+		
+		if(existedProduct != null) {
+			existedProduct.setQuantity(existedProduct.getQuantity() + product.getQuantity());
+			productRepo.save(existedProduct);
+			return;
+		} 
+		productRepo.save(product);
 	}
 
 	@Override
