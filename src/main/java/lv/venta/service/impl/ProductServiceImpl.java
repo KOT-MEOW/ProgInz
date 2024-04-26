@@ -20,15 +20,27 @@ public class ProductServiceImpl implements IProductCRUDService, IProductFilterin
 	
 
 	@Override
-	public ArrayList<Product> filtredByPriceLess(float threshold) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Product> filtredByPriceLess(float threshold) throws Exception{
+		
+		if(threshold <= 0) throw new Exception("Threshold is wrong");
+		
+		if(productRepo.count() == 0) throw new Exception("There is no product in the db");
+		
+		ArrayList<Product> filteredProducts = productRepo.findByPriceLessThan(threshold);
+		
+		return filteredProducts;
 	}
 
 	@Override
-	public ArrayList<Product> filtredByQuantityLess(int threshold) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Product> filtredByQuantityLess(int threshold) throws Exception {
+		
+		if(threshold <= 0) throw new Exception("Threshold is wrong");
+		
+		if(productRepo.count() == 0) throw new Exception("There is no product in the db");		
+		
+		ArrayList<Product> filteredProducts = productRepo.findByQuantityLessThan(threshold);
+		
+		return filteredProducts;
 	}
 
 	@Override
