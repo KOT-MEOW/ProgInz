@@ -9,7 +9,7 @@ public interface IProductFilteringService {
 	
 	public abstract ArrayList<Product> filtredByQuantityLess(int threshold) throws Exception;
 	
-	public abstract ArrayList<Product> filtredByTitleOrDescriprion(String phrase);
+	public abstract ArrayList<Product> filtredByTitleOrDescriprion(String phrase) throws Exception;
 	
-	public abstract float calculateTotalValueOfProducts();
+	public abstract float calculateTotalValueOfProducts() throws Exception;
 }

@@ -44,15 +44,23 @@ public class ProductServiceImpl implements IProductCRUDService, IProductFilterin
 	}
 
 	@Override
-	public ArrayList<Product> filtredByTitleOrDescriprion(String phrase) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Product> filtredByTitleOrDescriprion(String phrase) throws Exception {
+		if(phrase == null) throw new Exception("Phrase is wrong");
+		
+		if(productRepo.count() == 0) throw new Exception("There is no product in the db");
+		
+		ArrayList<Product> filteredProducts = productRepo.findByTitleIgnoreCaseLikeOrDescriptionIgnoreCaseLike(phrase, phrase);
+		
+		return filteredProducts;
 	}
 
 	@Override
-	public float calculateTotalValueOfProducts() {
-		// TODO Auto-generated method stub
-		return 0;
+	public float calculateTotalValueOfProducts() throws Exception {
+		if(productRepo.count() == 0) throw new Exception("There is no product in the db");
+		
+		float totalValue = productRepo.calculateTotalValueFromRepoProducts();
+		
+		return totalValue;
 	}
 
 	@Override
