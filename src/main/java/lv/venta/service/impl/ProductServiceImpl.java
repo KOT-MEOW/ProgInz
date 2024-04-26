@@ -50,27 +50,39 @@ public class ProductServiceImpl implements IProductCRUDService, IProductFilterin
 	}
 
 	@Override
-	public Product retriveById(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ArrayList<Product> retrieveAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void updateById(int id, Product product) {
-		// TODO Auto-generated method stub
+	public Product retriveById(int id) throws Exception{
+		if(id < 0) throw new Exception("id cant be negaative");
 		
+		if(productRepo.existsById(id)) { 
+			return productRepo.findById(id).get();
+		} else {
+			throw new Exception("That id not exists in system");
+		}
 	}
 
 	@Override
-	public void deleteById(int id) {
-		// TODO Auto-generated method stub
+	public ArrayList<Product> retrieveAll() throws Exception {
+		if(productRepo.count() == 0) throw new Exception("There is no product in the db");
+	
+		return (ArrayList<Product>) productRepo.findAll();
+	}
+
+	@Override
+	public void updateById(int id, Product product) throws Exception {
+		Product productForUpdate = retriveById(id);
 		
+		productForUpdate.setTitle(product.getTitle());
+		productForUpdate.setDescription(product.getDescription());
+		productForUpdate.setPrice(product.getPrice());
+		productForUpdate.setQuantity(productForUpdate.getQuantity());
+		
+		productRepo.save(productForUpdate);
+	}
+
+	@Override
+	public void deleteById(int id) throws Exception {
+		Product productForDeleting = retriveById(id);
+		productRepo.delete(productForDeleting);
 	}
 	
 }
