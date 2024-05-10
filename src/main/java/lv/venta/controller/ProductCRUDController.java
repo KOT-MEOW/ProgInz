@@ -1,4 +1,6 @@
-package lv.venta.model;
+package lv.venta.controller;
+
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import lv.venta.model.Product;
 import lv.venta.service.IProductCRUDService;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -25,6 +28,7 @@ public class ProductCRUDController {
 	public String getProdctCRUDAll(Model model) {
 		try {
 			model.addAttribute("mydata", crudService.retrieveAll());
+			model.addAttribute("msg", "All products");
 			return "more-product-in-page";
 		} catch (Exception e) {
 			model.addAttribute("mydata", e.getMessage());
@@ -100,6 +104,21 @@ public class ProductCRUDController {
 				model.addAttribute("mydata", e.getMessage());
 				return "error-page";
 			}
+		}
+	}
+
+	@GetMapping("/delete/{id}")//localhost:8080/product/crud/delete/1
+	public String getProductCRUDDeleteById(@PathVariable("id") int id, Model model) {
+
+		try {
+			crudService.deleteById(id);
+			ArrayList<Product> allProducts = crudService.retrieveAll();
+			model.addAttribute("mydata", allProducts);
+			return "more-product-in-page";// tiks parādīta producty-show-all-page.html ar visiem produktiem
+
+		} catch (Exception e) {
+			model.addAttribute("mydata", e.getMessage());
+			return "error-page";
 		}
 
 	}

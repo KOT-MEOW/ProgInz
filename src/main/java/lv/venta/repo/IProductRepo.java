@@ -21,7 +21,7 @@ public interface IProductRepo extends CrudRepository<Product, Integer> {
 	ArrayList<Product> findByQuantityLessThan(int threshold);
 	
 	// public abstract jau pec noklusejuma
-	ArrayList<Product> findByTitleIgnoreCaseLikeOrDescriptionIgnoreCaseLike(String phrase, String phrase2);
+	ArrayList<Product> findByTitleIgnoreCaseContainingOrDescriptionIgnoreCaseLike(String phrase, String phrase2);
 	
 	// public abstract jau pec noklusejuma
 	// bet vaicajumu vaidojam pasi

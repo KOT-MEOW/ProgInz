@@ -49,7 +49,7 @@ public class ProductServiceImpl implements IProductCRUDService, IProductFilterin
 		
 		if(productRepo.count() == 0) throw new Exception("There is no product in the db");
 		
-		ArrayList<Product> filteredProducts = productRepo.findByTitleIgnoreCaseLikeOrDescriptionIgnoreCaseLike(phrase, phrase);
+		ArrayList<Product> filteredProducts = productRepo.findByTitleIgnoreCaseContainingOrDescriptionIgnoreCaseLike(phrase, phrase);
 		
 		return filteredProducts;
 	}

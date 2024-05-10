@@ -1,13 +1,20 @@
-<html xmlns:th="http://www.thymeleaf.org"> 
-	
-<body>
-	<th:block th:each="product: ${mydata}">
-	<p>Product no JAVA:</p>
-	<p th:text="${product.getTitle()}"></p>
-	<p th:text="${product.getPrice()}"></p>
-	<p th:text="${product.getDescription()}"></p>
-	<p th:text="${product.getQuantity()}"></p>
-	</th:block>
-</body>
+<html xmlns:th="http://www.thymeleaf.org">
 
+<body>
+
+	<p>Visu produktu dati no JAVA:</p>
+	<p th:text="${msg}"></p>
+
+	<table>
+	<table border="1">
+		<tr th:each="tempP : ${mydata}">
+			<td th:text="${tempP.getId()}" ></td>
+			<td th:text="${tempP.getTitle()}">   </td>
+			<td th:text="${tempP.getPrice() + ' eur'}">   </td>
+			<td th:text="${tempP.getDescription()}">   </p>
+			<td th:text="${tempP.getQuantity()}">   </p>
+		</tr>
+		
+	</table>
+</body>
 </html>
