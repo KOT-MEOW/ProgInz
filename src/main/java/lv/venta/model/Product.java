@@ -37,7 +37,7 @@ public class Product {
 	
 	@NotNull
 	@Size(min = 3, max = 50)
-	@Pattern(regexp = "[A-Za-z ]+")
+	@Pattern(regexp = "[A-ZĒŪĪĻĶĢŠĀŽČŅa-zēūīļķģšāžčņ ]+", message = "Only letters and space are allowed")
 	@Column(name = "Title")
 	private String title;
 	
@@ -49,7 +49,7 @@ public class Product {
 	
 	@NotNull
 	@Size(min = 3, max = 100)
-	@Pattern(regexp = "[A-Za-z ]+")
+	@Pattern(regexp = "[A-ZĒŪĪĻĶĢŠĀŽČŅa-zēūīļķģšāžčņ ]+")
 	@Column(name = "Description")
 	private String description;
 	
