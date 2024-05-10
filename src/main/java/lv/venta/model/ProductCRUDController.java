@@ -14,17 +14,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.validation.Valid;
 
-
 @Controller
 @RequestMapping("/product/crud/")
 public class ProductCRUDController {
-	
+
 	@Autowired
 	private IProductCRUDService crudService;
 
-	
-	
-	@GetMapping("/all") //localhost:8080/product/crud/all
+	@GetMapping("/all") // localhost:8080/product/crud/all
 	public String getProdctCRUDAll(Model model) {
 		try {
 			model.addAttribute("mydata", crudService.retrieveAll());
@@ -33,11 +30,11 @@ public class ProductCRUDController {
 			model.addAttribute("mydata", e.getMessage());
 			return "error-page";
 		}
-		
+
 	}
-	
-	@GetMapping("/one") //localhost:8080/product/crud/one?id=
-	public String getProductCRUDone(@RequestParam("id")int id, Model model) {
+
+	@GetMapping("/one") // localhost:8080/product/crud/one?id=
+	public String getProductCRUDone(@RequestParam("id") int id, Model model) {
 		try {
 			Product foundProduct = crudService.retriveById(id);
 			model.addAttribute("mydata", foundProduct);
@@ -47,8 +44,8 @@ public class ProductCRUDController {
 			return "error-page";
 		}
 	}
-	
-	@GetMapping("/all/{id}") //localhost:8080/product/crud/all/{id}
+
+	@GetMapping("/all/{id}") // localhost:8080/product/crud/all/{id}
 	public String getProductCRUDall(@PathVariable("id") int id, Model model) {
 		try {
 			Product foundProduct = crudService.retriveById(id);
@@ -59,27 +56,24 @@ public class ProductCRUDController {
 			return "error-page";
 		}
 	}
-	
+
 	@GetMapping("/insert") // localhost:8080/product/crud/insert
 	public String getProductCrudInsert(Model model) {
 		model.addAttribute("product", new Product());
 		return "product-insert-page";
 	}
-	
+
 	@PostMapping("/insert")
-	public String postProductCRUDInsert(@Valid Product product, BindingResult result) {//ienāk aizpildītais produkts
-		//vai ir kādi validācijas pāŗkāpumi
-		if(result.hasErrors())
-		{
-			return "product-insert-page"; //turpinām palikt product-insert-page.html lapā
-		}
-		else
-		{
+	public String postProductCRUDInsert(@Valid Product product, BindingResult result) {// ienāk aizpildītais produkts
+		// vai ir kādi validācijas pāŗkāpumi
+		if (result.hasErrors()) {
+			return "product-insert-page"; // turpinām palikt product-insert-page.html lapā
+		} else {
 			crudService.create(product);
 			return "redirect:/product/crud/all";
 		}
 	}
-	
+
 	@GetMapping("/update/{id}") // localhost:8080/product/crud/update/{id}
 	public String getProductCrudUpdateById(@PathVariable("id") int id, Model model) {
 		try {
@@ -92,26 +86,22 @@ public class ProductCRUDController {
 			return "error-page";
 		}
 	}
-		
+
 	@PostMapping("/update/{id}")
-	public String postProductCrudUpdateById(@PathVariable("id") int id, Model model, 
-			@Valid Product product, BindingResult result) 
-	{
-		if(result.hasErrors()) {
+	public String postProductCrudUpdateById(@PathVariable("id") int id, Model model, @Valid Product product,
+			BindingResult result) {
+		if (result.hasErrors()) {
 			return "product-update-page";
 		} else {
-			
+			try {
+				crudService.updateById(id, product);
+				return "redirect:/product/crud/all/" + id;
+			} catch (Exception e) {
+				model.addAttribute("mydata", e.getMessage());
+				return "error-page";
+			}
 		}
-		
-		try {
-			crudService.updateById(id, product);
-			return "redirect:/product/crud/all/" + id;
-		} catch (Exception e) {
-			model.addAttribute("mydata", e.getMessage());
-			return "error-page";
-		}
-	}	
-	
-	
-	
+
+	}
+
 }
